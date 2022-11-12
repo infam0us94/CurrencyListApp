@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/currencyFragment"
-        android:name="com.currencyapplication.currencylistapp.CurrencyFragment"
+        android:name="com.currencyapplication.currencylistapp.presentation.feature_currency_list.CurrencyFragment"
         android:label="fragment_currency"
         tools:layout="@layout/fragment_currency" />
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.currencyapplication.currencylistapp.FavoriteFragment"
+        android:name="com.currencyapplication.currencylistapp.presentation.feature_favorite_list.FavoriteFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorite" />
 </navigation>
