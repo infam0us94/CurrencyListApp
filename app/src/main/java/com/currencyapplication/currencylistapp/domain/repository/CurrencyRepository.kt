@@ -1,8 +1,8 @@
 package com.currencyapplication.currencylistapp.domain.repository
 
-import com.currencyapplication.currencylistapp.data.local.dto.CurrencyDto
+import com.currencyapplication.currencylistapp.domain.model.CurrencyEntity
+import com.currencyapplication.currencylistapp.utils.Resource
 
 interface CurrencyRepository {
-
-    suspend fun getCurrencyList(): CurrencyDto
+    suspend fun getCurrencyList(): Resource<CurrencyEntity>
 }

@@ -1,15 +1,16 @@
 package com.currencyapplication.currencylistapp.data.repository
 
 import com.currencyapplication.currencylistapp.data.local.CurrencyApi
-import com.currencyapplication.currencylistapp.data.local.dto.CurrencyDto
+import com.currencyapplication.currencylistapp.data.local.SafeApiCall
+import com.currencyapplication.currencylistapp.domain.model.CurrencyEntity
 import com.currencyapplication.currencylistapp.domain.repository.CurrencyRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.currencyapplication.currencylistapp.utils.Resource
 
 class CurrencyRepositoryImpl(
     private val currencyApi: CurrencyApi
-) : CurrencyRepository {
-    override suspend fun getCurrencyList(): CurrencyDto = withContext(Dispatchers.IO) {
-        return@withContext currencyApi.getCurrencyList()
+) : CurrencyRepository, SafeApiCall {
+
+    override suspend fun getCurrencyList(): Resource<CurrencyEntity> {
+        return safeApiCall { currencyApi.getCurrencyList().toCurrencyEntity() }
     }
 }

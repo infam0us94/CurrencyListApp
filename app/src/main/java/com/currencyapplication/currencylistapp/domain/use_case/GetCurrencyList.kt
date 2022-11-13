@@ -1,10 +1,11 @@
 package com.currencyapplication.currencylistapp.domain.use_case
 
-import com.currencyapplication.currencylistapp.data.local.dto.CurrencyDto
+import com.currencyapplication.currencylistapp.domain.model.CurrencyEntity
 import com.currencyapplication.currencylistapp.domain.repository.CurrencyRepository
+import com.currencyapplication.currencylistapp.utils.Resource
 
 class GetCurrencyList(
     private val currencyRepository: CurrencyRepository
 ) {
-    suspend fun getCurrencyList(): CurrencyDto = currencyRepository.getCurrencyList()
+    suspend fun getCurrencyList(): Resource<CurrencyEntity> = currencyRepository.getCurrencyList()
 }
