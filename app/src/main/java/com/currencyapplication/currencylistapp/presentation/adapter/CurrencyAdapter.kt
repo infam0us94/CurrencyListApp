@@ -7,13 +7,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.currencyapplication.currencylistapp.data.local.dto.RatesDto
 import com.currencyapplication.currencylistapp.databinding.CurrencyItemBinding
+import com.currencyapplication.currencylistapp.domain.model.RatesEntity
 
-class CurrencyAdapter : ListAdapter<RatesDto, CurrencyAdapter.ItemHolder>(ItemComparator()) {
+class CurrencyAdapter : ListAdapter<RatesEntity, CurrencyAdapter.ItemHolder>(ItemComparator()) {
 
     class ItemHolder(private val binding: CurrencyItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(ratesDto: RatesDto) = with(binding) {
-            value.text = ratesDto.AED.toString()
+        fun bind(ratesEntity: RatesEntity) = with(binding) {
+            value.text = ratesEntity.rate.toString()
+            currency.text = ratesEntity.currency
         }
 
         companion object {
@@ -26,12 +28,12 @@ class CurrencyAdapter : ListAdapter<RatesDto, CurrencyAdapter.ItemHolder>(ItemCo
         }
     }
 
-    class ItemComparator : DiffUtil.ItemCallback<RatesDto>() {
-        override fun areItemsTheSame(oldItem: RatesDto, newItem: RatesDto): Boolean {
+    class ItemComparator : DiffUtil.ItemCallback<RatesEntity>() {
+        override fun areItemsTheSame(oldItem: RatesEntity, newItem: RatesEntity): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: RatesDto, newItem: RatesDto): Boolean {
+        override fun areContentsTheSame(oldItem: RatesEntity, newItem: RatesEntity): Boolean {
             return oldItem == newItem
         }
 

@@ -1,6 +1,7 @@
 package com.currencyapplication.currencylistapp.data.local.dto
 
 import com.currencyapplication.currencylistapp.domain.model.CurrencyEntity
+import com.currencyapplication.currencylistapp.domain.model.RatesEntity
 
 data class CurrencyDto(
     val base: String,
@@ -13,7 +14,7 @@ data class CurrencyDto(
         return CurrencyEntity(
             base = base,
             date = date,
-            rates = rates
+            rates = rates.map { RatesEntity(currency = it.key, rate = it.value) }
         )
     }
 }

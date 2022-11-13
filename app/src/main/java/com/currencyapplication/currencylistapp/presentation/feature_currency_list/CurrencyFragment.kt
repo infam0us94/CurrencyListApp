@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.currencyapplication.currencylistapp.data.local.dto.RatesDto
 import com.currencyapplication.currencylistapp.databinding.FragmentCurrencyBinding
 import com.currencyapplication.currencylistapp.presentation.adapter.CurrencyAdapter
 import com.currencyapplication.currencylistapp.utils.Resource
@@ -44,7 +45,7 @@ class CurrencyFragment : Fragment() {
                 when (event) {
                     is Resource.Success -> {
                         binding.loadStateProgress.visibilityIf(false)
-                        // adapter.submitList()
+                         adapter.submitList(event.value.rates)
                     }
 
                     is Resource.Failure -> {
