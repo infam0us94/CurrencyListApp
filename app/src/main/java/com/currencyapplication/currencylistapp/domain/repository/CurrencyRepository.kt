@@ -4,5 +4,5 @@ import com.currencyapplication.currencylistapp.domain.model.CurrencyEntity
 import com.currencyapplication.currencylistapp.utils.Resource
 
 interface CurrencyRepository {
-    suspend fun getCurrencyList(): Resource<CurrencyEntity>
+    suspend fun getCurrencyList(base: String): Resource<CurrencyEntity>
 }

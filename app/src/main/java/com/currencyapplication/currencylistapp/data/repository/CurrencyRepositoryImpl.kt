@@ -10,7 +10,7 @@ class CurrencyRepositoryImpl(
     private val currencyApi: CurrencyApi
 ) : CurrencyRepository, SafeApiCall {
 
-    override suspend fun getCurrencyList(): Resource<CurrencyEntity> {
-        return safeApiCall { currencyApi.getCurrencyList().toCurrencyEntity() }
+    override suspend fun getCurrencyList(base: String): Resource<CurrencyEntity> {
+        return safeApiCall { currencyApi.getCurrencyList(base).toCurrencyEntity() }
     }
 }

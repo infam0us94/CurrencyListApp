@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.currencyapplication.currencylistapp.data.local.dto.RatesDto
 import com.currencyapplication.currencylistapp.databinding.CurrencyItemBinding
 import com.currencyapplication.currencylistapp.domain.model.RatesEntity
 

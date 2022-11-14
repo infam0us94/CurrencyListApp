@@ -22,13 +22,9 @@ class CurrencyViewModel @Inject constructor(
     private val _currencyList = MutableStateFlow<Resource<CurrencyEntity>>(Resource.Loading)
     val currencyList: StateFlow<Resource<CurrencyEntity>> = _currencyList.asStateFlow()
 
-    init {
-        getCurrency()
-    }
-
-    private fun getCurrency() {
+    fun getCurrency(base: String) {
         viewModelScope.launch(dispatchers.io) {
-            val currencyList = useCase.getCurrencyList()
+            val currencyList = useCase.getCurrencyList(base)
             _currencyList.value = Resource.Loading
             when (currencyList) {
                 is Resource.Success -> _currencyList.value = currencyList

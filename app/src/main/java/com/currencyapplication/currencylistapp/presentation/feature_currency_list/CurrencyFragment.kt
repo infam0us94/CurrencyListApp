@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.currencyapplication.currencylistapp.data.local.dto.RatesDto
 import com.currencyapplication.currencylistapp.databinding.FragmentCurrencyBinding
 import com.currencyapplication.currencylistapp.presentation.adapter.CurrencyAdapter
 import com.currencyapplication.currencylistapp.utils.Resource
@@ -40,12 +40,31 @@ class CurrencyFragment : Fragment() {
 
         initRecView()
 
+        binding.currencySpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    adapter: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val base = adapter?.getItemAtPosition(position).toString()
+                    viewModel.getCurrency(base)
+                    getCurrency()
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            }
+    }
+
+    private fun getCurrency() {
         lifecycleScope.launchWhenStarted {
             viewModel.currencyList.collect { event ->
                 when (event) {
                     is Resource.Success -> {
                         binding.loadStateProgress.visibilityIf(false)
-                         adapter.submitList(event.value.rates)
+                        adapter.submitList(event.value.rates)
                     }
 
                     is Resource.Failure -> {
