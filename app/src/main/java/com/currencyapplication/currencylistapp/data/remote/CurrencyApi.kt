@@ -1,6 +1,6 @@
-package com.currencyapplication.currencylistapp.data.local
+package com.currencyapplication.currencylistapp.data.remote
 
-import com.currencyapplication.currencylistapp.data.local.dto.CurrencyDto
+import com.currencyapplication.currencylistapp.data.remote.dto.CurrencyDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 

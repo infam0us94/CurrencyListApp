@@ -2,7 +2,7 @@ package com.currencyapplication.currencylistapp.presentation.feature_currency_li
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.currencyapplication.currencylistapp.domain.model.CurrencyEntity
+import com.currencyapplication.currencylistapp.domain.model.Currency
 import com.currencyapplication.currencylistapp.domain.use_case.GetCurrencyList
 import com.currencyapplication.currencylistapp.utils.DispatcherProvider
 import com.currencyapplication.currencylistapp.utils.Resource
@@ -19,8 +19,8 @@ class CurrencyViewModel @Inject constructor(
     private val dispatchers: DispatcherProvider
 ) : ViewModel() {
 
-    private val _currencyList = MutableStateFlow<Resource<CurrencyEntity>>(Resource.Loading)
-    val currencyList: StateFlow<Resource<CurrencyEntity>> = _currencyList.asStateFlow()
+    private val _currencyList = MutableStateFlow<Resource<Currency>>(Resource.Loading)
+    val currencyList: StateFlow<Resource<Currency>> = _currencyList.asStateFlow()
 
     fun getCurrency(base: String) {
         viewModelScope.launch(dispatchers.io) {

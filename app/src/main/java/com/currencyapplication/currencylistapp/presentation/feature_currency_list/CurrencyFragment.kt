@@ -23,7 +23,9 @@ class CurrencyFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: CurrencyViewModel by viewModels()
-    lateinit var adapter: CurrencyAdapter
+
+    private lateinit var adapter: CurrencyAdapter
+    private lateinit var baseCurrency: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +42,28 @@ class CurrencyFragment : Fragment() {
 
         initRecView()
 
+        initSpinner()
+    }
+
+    private fun getCurrency() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.currencyList.collect { event ->
+                when (event) {
+                    is Resource.Success -> {
+                        viewVisibility(false)
+                        adapter.submitList(event.value.rates)
+                    }
+                    is Resource.Failure -> {
+                        Toast.makeText(requireContext(), "Failure", Toast.LENGTH_SHORT).show()
+                        viewVisibility(true)
+                    }
+                    is Resource.Loading -> viewVisibility(true)
+                }
+            }
+        }
+    }
+
+    private fun initSpinner() {
         binding.currencySpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -48,33 +72,13 @@ class CurrencyFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    val base = adapter?.getItemAtPosition(position).toString()
-                    viewModel.getCurrency(base)
+                    baseCurrency = adapter?.getItemAtPosition(position).toString()
+                    viewModel.getCurrency(baseCurrency)
                     getCurrency()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
-
             }
-    }
-
-    private fun getCurrency() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.currencyList.collect { event ->
-                when (event) {
-                    is Resource.Success -> {
-                        binding.loadStateProgress.visibilityIf(false)
-                        adapter.submitList(event.value.rates)
-                    }
-
-                    is Resource.Failure -> {
-                        Toast.makeText(requireContext(), "Failure", Toast.LENGTH_SHORT).show()
-                        binding.loadStateProgress.visibilityIf(true)
-                    }
-                    is Resource.Loading -> binding.loadStateProgress.visibilityIf(true)
-                }
-            }
-        }
     }
 
     private fun initRecView() = with(binding) {
@@ -83,9 +87,15 @@ class CurrencyFragment : Fragment() {
         recView.adapter = adapter
     }
 
+    private fun viewVisibility(isVisible: Boolean) {
+        with(binding) {
+            loadStateProgress.visibilityIf(isVisible)
+            recView.visibilityIf(!isVisible)
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

@@ -1,8 +1,11 @@
 package com.currencyapplication.currencylistapp.di
 
+import android.app.Application
+import androidx.room.Room
 import com.currencyapplication.currencylistapp.BuildConfig
-import com.currencyapplication.currencylistapp.data.local.CurrencyApi
-import com.currencyapplication.currencylistapp.data.local.CurrencyInterceptor
+import com.currencyapplication.currencylistapp.data.local.CurrencyDatabase
+import com.currencyapplication.currencylistapp.data.remote.CurrencyApi
+import com.currencyapplication.currencylistapp.data.remote.CurrencyInterceptor
 import com.currencyapplication.currencylistapp.data.repository.CurrencyRepositoryImpl
 import com.currencyapplication.currencylistapp.domain.repository.CurrencyRepository
 import com.currencyapplication.currencylistapp.domain.use_case.GetCurrencyList
@@ -32,9 +35,20 @@ object CurrencyModule {
     @Provides
     @Singleton
     fun provideCurrencyRepository(
-        currencyApi: CurrencyApi
+        currencyApi: CurrencyApi,
+        database: CurrencyDatabase
     ): CurrencyRepository {
-        return CurrencyRepositoryImpl(currencyApi)
+        return CurrencyRepositoryImpl(currencyApi, database.currencyDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNoteDatabase(application: Application): CurrencyDatabase {
+        return Room.databaseBuilder(
+            application,
+            CurrencyDatabase::class.java,
+            CurrencyDatabase.DATABASE_NAME
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Provides
