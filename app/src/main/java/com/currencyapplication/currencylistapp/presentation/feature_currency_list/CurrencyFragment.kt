@@ -56,8 +56,8 @@ class CurrencyFragment : Fragment() {
                         adapter.submitList(event.value.rates)
                     }
                     is Resource.Failure -> {
-                        showErrorDialog()
                         viewVisibility(false)
+                        showErrorDialog()
                     }
                     is Resource.Loading -> viewVisibility(true)
                 }
@@ -95,7 +95,7 @@ class CurrencyFragment : Fragment() {
             .setIcon(R.drawable.ic_baseline_error_24)
             .setPositiveButton(R.string.error_dialog_positive_button) { _, _ ->
                 getCurrency()
-            }.create()
+            }.show()
     }
 
     private fun viewVisibility(isVisible: Boolean) {
