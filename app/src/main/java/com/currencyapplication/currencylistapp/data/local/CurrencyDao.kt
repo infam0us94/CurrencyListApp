@@ -6,12 +6,12 @@ import com.currencyapplication.currencylistapp.domain.model.Rate
 @Dao
 interface CurrencyDao {
 
-    @Query("SELECT * FROM currency_table")
-    suspend fun getCurrencyFromDatabase(): List<Rate>
+    @Query("SELECT * FROM currency_table WHERE base = :base")
+    suspend fun getRatesFromDatabase(base: String): List<Rate>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addCurrencyToDatabase(addCurrency: Rate)
+    suspend fun addRateToDatabase(addRate: Rate)
 
     @Delete
-    suspend fun removeCurrencyFromDatabase(removeCurrency: Rate)
+    suspend fun removeRateFromDatabase(removeRate: Rate)
 }

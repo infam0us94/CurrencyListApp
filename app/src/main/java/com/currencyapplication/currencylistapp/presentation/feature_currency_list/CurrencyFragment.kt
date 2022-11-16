@@ -82,7 +82,7 @@ class CurrencyFragment : Fragment() {
     }
 
     private fun initRecView() = with(binding) {
-        adapter = CurrencyAdapter()
+        adapter = CurrencyAdapter { rate -> viewModel.addRateInDatabase(rate) }
         recView.layoutManager = LinearLayoutManager(requireContext())
         recView.adapter = adapter
     }

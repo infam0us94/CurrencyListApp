@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "currency_table")
 data class Rate(
-    @PrimaryKey
+    @ColumnInfo(name = "base")
     val base: String,
-    @ColumnInfo(name = "currency")
+    @PrimaryKey
     val currency: String,
     @ColumnInfo(name = "rate")
-    val rate: Double,
+    val rate: Double
 )

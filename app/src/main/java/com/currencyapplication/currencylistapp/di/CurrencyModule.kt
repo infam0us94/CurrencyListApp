@@ -8,7 +8,7 @@ import com.currencyapplication.currencylistapp.data.remote.CurrencyApi
 import com.currencyapplication.currencylistapp.data.remote.CurrencyInterceptor
 import com.currencyapplication.currencylistapp.data.repository.CurrencyRepositoryImpl
 import com.currencyapplication.currencylistapp.domain.repository.CurrencyRepository
-import com.currencyapplication.currencylistapp.domain.use_case.GetCurrencyList
+import com.currencyapplication.currencylistapp.domain.use_case.*
 import com.currencyapplication.currencylistapp.utils.DispatcherProvider
 import dagger.Module
 import dagger.Provides
@@ -28,8 +28,13 @@ object CurrencyModule {
 
     @Provides
     @Singleton
-    fun provideGetWordInfoUseCase(currencyRepository: CurrencyRepository): GetCurrencyList {
-        return GetCurrencyList(currencyRepository)
+    fun provideCurrencyUseCases(currencyRepository: CurrencyRepository): CurrencyUseCases {
+        return CurrencyUseCases(
+            getCurrencyList = GetCurrencyList(currencyRepository),
+            getRatesFromDatabase = GetRatesFromDatabase(currencyRepository),
+            addRateInDatabase = AddRateInDatabase(currencyRepository),
+            removeRateFromDatabase = RemoveRateFromDatabase(currencyRepository)
+        )
     }
 
     @Provides

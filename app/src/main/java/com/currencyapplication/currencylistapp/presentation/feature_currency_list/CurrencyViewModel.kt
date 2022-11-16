@@ -3,7 +3,8 @@ package com.currencyapplication.currencylistapp.presentation.feature_currency_li
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.currencyapplication.currencylistapp.domain.model.Currency
-import com.currencyapplication.currencylistapp.domain.use_case.GetCurrencyList
+import com.currencyapplication.currencylistapp.domain.model.Rate
+import com.currencyapplication.currencylistapp.domain.use_case.CurrencyUseCases
 import com.currencyapplication.currencylistapp.utils.DispatcherProvider
 import com.currencyapplication.currencylistapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CurrencyViewModel @Inject constructor(
-    private val useCase: GetCurrencyList,
+    private val currencyUseCases: CurrencyUseCases,
     private val dispatchers: DispatcherProvider
 ) : ViewModel() {
 
@@ -24,13 +25,19 @@ class CurrencyViewModel @Inject constructor(
 
     fun getCurrency(base: String) {
         viewModelScope.launch(dispatchers.io) {
-            val currencyList = useCase.getCurrencyList(base)
+            val currencyList = currencyUseCases.getCurrencyList(base)
             _currencyList.value = Resource.Loading
             when (currencyList) {
                 is Resource.Success -> _currencyList.value = currencyList
                 is Resource.Failure -> _currencyList.value = Resource.Failure(false, null, null)
                 is Resource.Loading -> _currencyList.value = Resource.Loading
             }
+        }
+    }
+
+    fun addRateInDatabase(rate: Rate) {
+        viewModelScope.launch {
+            currencyUseCases.addRateInDatabase(rate)
         }
     }
 }

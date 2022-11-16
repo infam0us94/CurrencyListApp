@@ -7,6 +7,6 @@ import com.currencyapplication.currencylistapp.utils.Resource
 class GetCurrencyList(
     private val currencyRepository: CurrencyRepository
 ) {
-    suspend fun getCurrencyList(base: String): Resource<Currency> =
+    suspend operator fun invoke(base: String): Resource<Currency> =
         currencyRepository.getCurrencyList(base)
 }

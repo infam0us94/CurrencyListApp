@@ -8,11 +8,11 @@ import com.currencyapplication.currencylistapp.databinding.CurrencyItemBinding
 import com.currencyapplication.currencylistapp.domain.model.Rate
 import com.currencyapplication.currencylistapp.utils.DiffUtilCallback
 
-class CurrencyAdapter(
+class FavoriteAdapter(
     private val onClick: (Rate) -> Unit
-) : ListAdapter<Rate, CurrencyAdapter.ItemHolder>(DiffUtilCallback()) {
+) : ListAdapter<Rate, FavoriteAdapter.ItemHolder>(DiffUtilCallback()) {
 
-    inner class ItemHolder(
+    class ItemHolder(
         private val binding: CurrencyItemBinding,
         private val onClick: (Rate) -> Unit
     ) :
