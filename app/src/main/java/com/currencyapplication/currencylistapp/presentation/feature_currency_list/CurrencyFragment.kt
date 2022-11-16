@@ -1,15 +1,16 @@
 package com.currencyapplication.currencylistapp.presentation.feature_currency_list
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.currencyapplication.currencylistapp.R
 import com.currencyapplication.currencylistapp.databinding.FragmentCurrencyBinding
 import com.currencyapplication.currencylistapp.presentation.adapter.CurrencyAdapter
 import com.currencyapplication.currencylistapp.utils.Resource
@@ -46,6 +47,7 @@ class CurrencyFragment : Fragment() {
     }
 
     private fun getCurrency() {
+        viewModel.getCurrency(baseCurrency)
         lifecycleScope.launchWhenStarted {
             viewModel.currencyList.collect { event ->
                 when (event) {
@@ -54,8 +56,8 @@ class CurrencyFragment : Fragment() {
                         adapter.submitList(event.value.rates)
                     }
                     is Resource.Failure -> {
-                        Toast.makeText(requireContext(), "Failure", Toast.LENGTH_SHORT).show()
-                        viewVisibility(true)
+                        showErrorDialog()
+                        viewVisibility(false)
                     }
                     is Resource.Loading -> viewVisibility(true)
                 }
@@ -73,7 +75,6 @@ class CurrencyFragment : Fragment() {
                     id: Long
                 ) {
                     baseCurrency = adapter?.getItemAtPosition(position).toString()
-                    viewModel.getCurrency(baseCurrency)
                     getCurrency()
                 }
 
@@ -85,6 +86,16 @@ class CurrencyFragment : Fragment() {
         adapter = CurrencyAdapter { rate -> viewModel.addRateInDatabase(rate) }
         recView.layoutManager = LinearLayoutManager(requireContext())
         recView.adapter = adapter
+    }
+
+    private fun showErrorDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.error_dialog_title)
+            .setMessage(R.string.error_dialog_message)
+            .setIcon(R.drawable.ic_baseline_error_24)
+            .setPositiveButton(R.string.error_dialog_positive_button) { _, _ ->
+                getCurrency()
+            }.create()
     }
 
     private fun viewVisibility(isVisible: Boolean) {

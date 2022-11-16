@@ -2,6 +2,9 @@
     <string name="app_name">CurrencyListApp</string>
     <string name="favorites">Избранное</string>
     <string name="currency_list">Курсы валют</string>
+    <string name="error_dialog_title">Ошибка</string>
+    <string name="error_dialog_message">Упс, что то пошло не так. Пожалуйста, повторите попытку снова.</string>
+    <string name="error_dialog_positive_button">ПОВТОРИТЬ</string>
 
     <string-array name="currency">
         <item>AED</item>
