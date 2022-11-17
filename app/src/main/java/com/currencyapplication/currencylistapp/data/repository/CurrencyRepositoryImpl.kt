@@ -16,8 +16,12 @@ class CurrencyRepositoryImpl(
     override suspend fun getCurrencyList(base: String): Resource<Currency> =
         safeApiCall { currencyApi.getCurrencyList(base).toCurrencyEntity() }
 
-    override suspend fun getRatesFromDatabase(base: String): List<Rate> =
-        currencyDao.getRatesFromDatabase(base)
+    override suspend fun getRatesFromDatabase(
+        base: String,
+        currency: Int?,
+        rate: Int?
+    ): List<Rate> =
+        currencyDao.getRatesFromDatabase(base, currency, rate)
 
     override suspend fun addRateToDatabase(rate: Rate) = currencyDao.addRateToDatabase(rate)
 

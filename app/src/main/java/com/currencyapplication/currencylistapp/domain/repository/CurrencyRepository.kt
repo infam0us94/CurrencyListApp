@@ -8,7 +8,7 @@ interface CurrencyRepository {
 
     suspend fun getCurrencyList(base: String): Resource<Currency>
 
-    suspend fun getRatesFromDatabase(base: String): List<Rate>
+    suspend fun getRatesFromDatabase(base: String, currency: Int?, rate: Int?): List<Rate>
 
     suspend fun addRateToDatabase(rate: Rate)
 

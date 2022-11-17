@@ -9,10 +9,23 @@
         android:id="@+id/currencyFragment"
         android:name="com.currencyapplication.currencylistapp.presentation.feature_currency_list.CurrencyFragment"
         android:label="fragment_currency"
-        tools:layout="@layout/fragment_currency" />
+        tools:layout="@layout/fragment_currency" >
+        <action
+            android:id="@+id/action_currencyFragment_to_filterFragment"
+            app:destination="@id/filterFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.currencyapplication.currencylistapp.presentation.feature_favorite_list.FavoriteFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_filterFragment2"
+            app:destination="@id/filterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.currencyapplication.currencylistapp.presentation.feature_filter.FilterFragment"
+        android:label="fragment_filter"
+        tools:layout="@layout/fragment_filter" />
 </navigation>

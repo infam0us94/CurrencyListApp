@@ -21,9 +21,9 @@ class FavoritesViewModel @Inject constructor(
     private val _favoritesList = MutableStateFlow<List<Rate>>(listOf())
     val favoritesList: StateFlow<List<Rate>> = _favoritesList.asStateFlow()
 
-    fun getCurrency(base: String) {
+    fun getCurrency(base: String, currency: Int?, rate: Int?) {
         viewModelScope.launch(dispatchers.io) {
-            val rates = currencyUseCases.getRatesFromDatabase(base)
+            val rates = currencyUseCases.getRatesFromDatabase(base, currency, rate)
             _favoritesList.value = rates
         }
     }

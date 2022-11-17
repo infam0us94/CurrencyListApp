@@ -6,6 +6,6 @@ import com.currencyapplication.currencylistapp.domain.repository.CurrencyReposit
 class GetRatesFromDatabase(
     private val currencyRepository: CurrencyRepository
 ) {
-    suspend operator fun invoke(base: String): List<Rate> =
-        currencyRepository.getRatesFromDatabase(base)
+    suspend operator fun invoke(base: String, currency: Int?, rate: Int?): List<Rate> =
+        currencyRepository.getRatesFromDatabase(base, currency, rate)
 }

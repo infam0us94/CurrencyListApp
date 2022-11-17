@@ -6,6 +6,13 @@
     <string name="error_dialog_message">Упс, что то пошло не так. Пожалуйста, повторите попытку снова.</string>
     <string name="error_dialog_positive_button">ПОВТОРИТЬ</string>
 
+    <string name="sorted">Сортировка</string>
+    <string name="alphabet">По Алфавиту:</string>
+    <string name="value">По Значению:</string>
+    <string name="ascending">По возрастанию</string>
+    <string name="descending">По убыванию</string>
+    <string name="action">Применить</string>
+
     <string-array name="currency">
         <item>AED</item>
         <item>AFN</item>
