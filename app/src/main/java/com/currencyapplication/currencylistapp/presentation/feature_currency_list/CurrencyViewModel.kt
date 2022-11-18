@@ -36,7 +36,7 @@ class CurrencyViewModel @Inject constructor(
     }
 
     fun addRateInDatabase(rate: Rate) {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatchers.io) {
             currencyUseCases.addRateInDatabase(rate)
         }
     }

@@ -29,7 +29,7 @@ class FavoritesViewModel @Inject constructor(
     }
 
     fun removeRateFromDatabase(rate: Rate) {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatchers.io) {
             currencyUseCases.removeRateFromDatabase(rate)
         }
     }
