@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/CurrencyListApp/app/src/main/res/drawable/ic_baseline_error_24.xml" value="0.103" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CurrencyListApp/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CurrencyListApp/app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.1145" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CurrencyListApp/app/src/main/res/drawable/ic_baseline_star_border_24.xml" value="0.1995" />
@@ -13,7 +14,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CurrencyListApp/app/src/main/res/layout/CurrencyItem.xml" value="0.259963768115942" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CurrencyListApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CurrencyListApp/app/src/main/res/layout/currency_item.xml" value="0.35572916666666665" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CurrencyListApp/app/src/main/res/layout/fragment_currency.xml" value="0.286231884057971" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CurrencyListApp/app/src/main/res/layout/fragment_currency.xml" value="0.13592233009708737" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CurrencyListApp/app/src/main/res/layout/fragment_favorite.xml" value="0.22" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CurrencyListApp/app/src/main/res/layout/fragment_favorites.xml" value="0.286231884057971" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CurrencyListApp/app/src/main/res/layout/fragment_filter.xml" value="0.22" />
